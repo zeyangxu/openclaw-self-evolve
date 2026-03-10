@@ -59,6 +59,26 @@ Each entry in `evolutions/YYYY-MM-DD.md`:
 - **Confidence**: [high | medium | low]
 ```
 
+## Cron Setup
+
+To run self-evolve automatically each morning, add a cron job via OpenClaw CLI:
+
+```bash
+openclaw cron add \
+  --name "self-evolve" \
+  --cron "0 22 * * *" \
+  --tz "UTC" \
+  --session isolated \
+  --message "Load the self-evolve skill and run the daily analysis workflow on yesterday's sessions. Log findings to evolutions/YYYY-MM-DD.md and update evolutions/last-run.json." \
+  --timeout-seconds 120 \
+  --announce \
+  --description "Daily self-evolution: analyze yesterday's sessions"
+```
+
+Adjust the cron expression and timezone to your preferred morning time. The example above runs at 22:00 UTC (9:00 AM AEDT).
+
+The `--session isolated` flag ensures it runs in its own session without polluting your main chat. `--announce` delivers a summary to your last active channel when complete.
+
 ## Guardrails
 
 - Never auto-delete existing skills or rules — only add or augment
