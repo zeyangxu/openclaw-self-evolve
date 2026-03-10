@@ -79,6 +79,34 @@ Adjust the cron expression and timezone to your preferred morning time. The exam
 
 The `--session isolated` flag ensures it runs in its own session without polluting your main chat. `--announce` delivers a summary to your last active channel when complete.
 
+## Post-Run Notification
+
+After completing the daily analysis workflow, **always send a summary message to the user** via the `message` tool. The message should include:
+
+- Date analyzed
+- Number of sessions reviewed
+- Number of evolutions found
+- Brief list of actions taken (or "No new patterns found" if none)
+- Link to the evolution log file if any changes were made
+
+Example message format:
+```
+🧬 Self-Evolve 日报 (2026-03-10)
+- 分析 session: 8 个
+- 发现进化点: 3 个
+  1. 新增 reference: xxx
+  2. 更新 TOOLS.md: xxx
+  3. 更新 MEMORY.md: xxx
+- 详情: evolutions/2026-03-10.md
+```
+
+If nothing was found:
+```
+🧬 Self-Evolve 日报 (2026-03-10)
+- 分析 session: 2 个
+- 无新模式发现，一切正常 ✅
+```
+
 ## Guardrails
 
 - Never auto-delete existing skills or rules — only add or augment
